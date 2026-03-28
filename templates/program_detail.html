@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% block title %}{{ program.title }} | {{
+site_settings.site_name }}{% endblock %} {% block content %}
+<section class="page-hero compact-hero">
+  <div class="container reveal">
+    <span class="eyebrow">Program Detail</span>
+    <h1>{{ program.title }}</h1>
+    <p>{{ program.summary }}</p>
+  </div>
+</section>
+<section class="section section-split">
+  <div class="container split-layout">
+    <div class="reveal">
+      <span class="section-label">Overview</span>
+      <h2>A focused story, not a cluttered section.</h2>
+      <p>{{ program.description }}</p>
+    </div>
+    <div class="story-card reveal delay-1">
+      <h3>Why this matters</h3>
+      <p>
+        This structure gives the website room to grow. Each program can hold
+        more media, more updates, more event links, and more storytelling later
+        without spoiling the homepage layout.
+      </p>
+    </div>
+  </div>
+</section>
+<section class="section tinted-section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="section-label">Related Events</span>
+      <h2>Events connected to this program.</h2>
+    </div>
+    <div class="card-grid three-grid">
+      {% for event in related_events %}
+      <article class="event-card reveal">
+        <div class="media-shell">
+          {% if event.cover_media and event.cover_media_type == 'image' %}
+          <img
+            src="{{ url_for('static', filename='uploads/events/' ~ event.cover_media) }}"
+            alt="{{ event.title }}"
+          />
+          {% elif event.cover_media and event.cover_media_type == 'video' %}
+          <video autoplay muted loop playsinline>
+            <source
+              src="{{ url_for('static', filename='uploads/events/' ~ event.cover_media) }}"
+            />
+          </video>
+          {% else %}
+          <div class="placeholder-media">No media yet</div>
+          {% endif %}
+        </div>
+        <div class="event-card-body">
+          <h3>{{ event.title }}</h3>
+          <p>{{ event.summary }}</p>
+          <a
+            href="{{ url_for('event_detail_page', slug=event.slug) }}"
+            class="text-link"
+            >View event</a
+          >
+        </div>
+      </article>
+      {% else %}
+      <article class="empty-panel reveal">
+        <h3>No related events yet</h3>
+        <p>Add events under this category from the admin dashboard.</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

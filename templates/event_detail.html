@@ -1,0 +1,121 @@
+{% extends 'base.html' %} {% block title %}{{ event.title }} | {{
+site_settings.site_name }}{% endblock %} {% block content %}
+<section class="page-hero compact-hero">
+  <div class="container reveal">
+    <span class="eyebrow">Event Detail</span>
+    <h1>{{ event.title }}</h1>
+    <p>
+      {{ event.summary or 'A detailed event view with media, timeline, and
+      administrative updates.' }}
+    </p>
+  </div>
+</section>
+<section class="section section-split">
+  <div class="container split-layout">
+    <div class="reveal">
+      <div class="detail-stack">
+        <article class="detail-item">
+          <strong>Date</strong
+          ><span>{{ event.event_date or 'To be announced' }}</span>
+        </article>
+        <article class="detail-item">
+          <strong>Time</strong
+          ><span>{{ event.event_time or 'To be announced' }}</span>
+        </article>
+        <article class="detail-item">
+          <strong>Location</strong
+          ><span>{{ event.location or 'Nigeria' }}</span>
+        </article>
+        <article class="detail-item">
+          <strong>Status</strong><span>{{ event.status or 'Upcoming' }}</span>
+        </article>
+        <article class="detail-item">
+          <strong>Category</strong
+          ><span>{{ event.category or 'General' }}</span>
+        </article>
+      </div>
+    </div>
+    <div class="reveal delay-1">
+      <span class="section-label">Event Note</span>
+      <h2>Full event description.</h2>
+      <p>
+        {{ event.description or 'Full event note will appear here once the admin
+        adds it.' }}
+      </p>
+    </div>
+  </div>
+</section>
+<section class="section tinted-section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="section-label">Media</span>
+      <h2>Images and videos uploaded for this event.</h2>
+    </div>
+    <div class="masonry-grid">
+      {% for item in media %}
+      <div class="gallery-tile reveal">
+        {% if item.media_type == 'image' %}
+        <img
+          src="{{ url_for('static', filename='uploads/events/' ~ item.filename) }}"
+          alt="{{ item.alt_text or event.title }}"
+        />
+        {% else %}
+        <video controls>
+          <source
+            src="{{ url_for('static', filename='uploads/events/' ~ item.filename) }}"
+          />
+        </video>
+        {% endif %}
+      </div>
+      {% else %}
+      <div class="empty-panel reveal">
+        <h3>No media uploaded yet</h3>
+        <p>
+          The admin can add multiple pictures or videos when creating or editing
+          this event.
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="section-label">More Events</span>
+      <h2>Keep exploring</h2>
+    </div>
+    <div class="card-grid three-grid">
+      {% for item in related_events %}
+      <article class="event-card reveal">
+        <div class="media-shell">
+          {% if item.cover_media and item.cover_media_type == 'image' %}
+          <img
+            src="{{ url_for('static', filename='uploads/events/' ~ item.cover_media) }}"
+            alt="{{ item.title }}"
+          />
+          {% elif item.cover_media and item.cover_media_type == 'video' %}
+          <video autoplay muted loop playsinline>
+            <source
+              src="{{ url_for('static', filename='uploads/events/' ~ item.cover_media) }}"
+            />
+          </video>
+          {% else %}
+          <div class="placeholder-media">No media yet</div>
+          {% endif %}
+        </div>
+        <div class="event-card-body">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.summary }}</p>
+          <a
+            href="{{ url_for('event_detail_page', slug=item.slug) }}"
+            class="text-link"
+            >Open event</a
+          >
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

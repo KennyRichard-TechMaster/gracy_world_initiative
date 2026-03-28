@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block title %}Gallery | {{ site_settings.site_name
+}}{% endblock %} {% block content %}
+<section class="page-hero compact-hero">
+  <div class="container reveal">
+    <span class="eyebrow">Gallery</span>
+    <h1>A visual storytelling page with cleaner editorial presentation.</h1>
+    <p>This gallery grows directly from the events admin workflow.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container masonry-grid">
+    {% for item in media %}
+    <a
+      class="gallery-tile reveal"
+      href="{{ url_for('event_detail_page', slug=item.event_slug) }}"
+    >
+      {% if item.media_type == 'image' %}
+      <img
+        src="{{ url_for('static', filename='uploads/events/' ~ item.filename) }}"
+        alt="{{ item.alt_text or item.event_title }}"
+      />
+      {% else %}
+      <video muted autoplay loop playsinline>
+        <source
+          src="{{ url_for('static', filename='uploads/events/' ~ item.filename) }}"
+        />
+      </video>
+      {% endif %}
+      <span>{{ item.event_title }}</span>
+    </a>
+    {% else %}
+    <div class="empty-panel reveal">
+      <h3>No gallery items available</h3>
+      <p>Start by uploading media under your events in the admin panel.</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

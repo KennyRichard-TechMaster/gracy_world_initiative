@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block title %}FAQ | {{ site_settings.site_name }}{%
+endblock %} {% block content %}
+<section class="page-hero compact-hero">
+  <div class="container reveal">
+    <span class="eyebrow">FAQ</span>
+    <h1>Frequently asked questions</h1>
+    <p>
+      A proper FAQ section that helps people understand the mission, events, and
+      collaboration options quickly.
+    </p>
+  </div>
+</section>
+<section class="section">
+  <div class="container faq-list">
+    {% set faqs = [ ('What does this initiative focus on?', 'The initiative
+    focuses on educational support, book access, outreach experiences, and
+    partnership-led impact for children and learning communities.'), ('Can
+    organizations partner with the initiative?', 'Yes. Brands, schools,
+    volunteers, and institutions can reach out through the contact form or
+    social contact links to discuss partnership opportunities.'), ('Can the
+    admin update events directly?', 'Yes. The admin dashboard allows you to
+    create, edit, and delete events, including event title, note, date, time,
+    location, category, and multiple media files.'), ('Can the website show both
+    images and videos?', 'Yes. The event management workflow supports both
+    images and videos, and those items can appear on event pages and gallery
+    pages.'), ('How are inquiries handled?', 'Inquiries submitted through the
+    contact page are stored in the database and shown on the admin dashboard for
+    review.'), ('Does the website support future growth?', 'Yes. The structure
+    includes public pages, event detail pages, a gallery, an FAQ, and
+    administrative tools that can be expanded later.'), ] %} {% for question,
+    answer in faqs %}
+    <article class="faq-item reveal">
+      <button class="faq-question" type="button">
+        <span>{{ question }}</span>
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>{{ answer }}</p>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

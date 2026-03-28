@@ -1,0 +1,86 @@
+{% extends 'admin/layout.html' %}
+{% block admin_title %}{% if event %}Edit Event{% else %}Create Event{% endif %}{% endblock %}
+{% block admin_content %}
+<section class="admin-panel-block">
+    <div class="panel-header"><h1>{% if event %}Edit Event{% else %}Create New Event{% endif %}</h1></div>
+    <form method="post" enctype="multipart/form-data" class="contact-form admin-event-form" action="{{ form_action }}">
+        <div class="field-group">
+            <label>Event title</label>
+            <input type="text" name="title" value="{{ event.title if event else '' }}" required>
+        </div>
+        <div class="field-group">
+            <label>Event summary / short note</label>
+            <textarea name="summary" rows="3">{{ event.summary if event else '' }}</textarea>
+        </div>
+        <div class="field-group">
+            <label>Full event description</label>
+            <textarea name="description" rows="8">{{ event.description if event else '' }}</textarea>
+        </div>
+        <div class="field-row">
+            <div class="field-group">
+                <label>Date</label>
+                <input type="date" name="event_date" value="{{ event.event_date if event else '' }}">
+            </div>
+            <div class="field-group">
+                <label>Time</label>
+                <input type="time" name="event_time" value="{{ event.event_time if event else '' }}">
+            </div>
+        </div>
+        <div class="field-row">
+            <div class="field-group">
+                <label>Location</label>
+                <input type="text" name="location" value="{{ event.location if event else '' }}">
+            </div>
+            <div class="field-group">
+                <label>Status</label>
+                <select name="status">
+                    {% set selected_status = event.status if event else 'Upcoming' %}
+                    {% for option in ['Upcoming', 'Completed', 'Ongoing'] %}
+                    <option value="{{ option }}" {% if selected_status == option %}selected{% endif %}>{{ option }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="field-row">
+            <div class="field-group">
+                <label>Category / program</label>
+                <select name="category">
+                    <option value="">General</option>
+                    {% for program in programs %}
+                    <option value="{{ program.title }}" {% if event and event.category == program.title %}selected{% endif %}>{{ program.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="field-group checkbox-field">
+                <label><input type="checkbox" name="featured" {% if event and event.featured %}checked{% endif %}> Mark as featured</label>
+            </div>
+        </div>
+        <div class="field-group">
+            <label>Upload images or videos</label>
+            <input type="file" name="media_files" multiple accept="image/*,video/mp4,video/webm,video/quicktime,video/x-m4v">
+            <small class="field-hint">You can upload multiple files at once.</small>
+        </div>
+        <button class="btn btn-primary" type="submit">{% if event %}Update event{% else %}Create event{% endif %}</button>
+    </form>
+</section>
+
+{% if existing_media %}
+<section class="admin-panel-block">
+    <div class="panel-header"><h2>Existing Media</h2></div>
+    <div class="masonry-grid compact-grid">
+        {% for item in existing_media %}
+        <div class="gallery-tile admin-media-tile">
+            {% if item.media_type == 'image' %}
+                <img src="{{ url_for('static', filename='uploads/events/' ~ item.filename) }}" alt="{{ item.alt_text or 'Media' }}">
+            {% else %}
+                <video controls><source src="{{ url_for('static', filename='uploads/events/' ~ item.filename) }}"></video>
+            {% endif %}
+            <form method="post" action="{{ url_for('admin_delete_media', media_id=item.id) }}" onsubmit="return confirm('Delete this media item?');">
+                <button type="submit" class="table-danger">Delete media</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endblock %}

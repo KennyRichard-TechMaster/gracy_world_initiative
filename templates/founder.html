@@ -1,0 +1,70 @@
+{% extends 'base.html' %} {% block title %}Founder | {{ site_settings.site_name
+}}{% endblock %} {% block content %}
+<section class="page-hero compact-hero">
+  <div class="container reveal">
+    <span class="eyebrow">Founder</span>
+    <h1>The mind behind the mission.</h1>
+    <p>
+      A premium founder page that explains the heart, the problem, and the
+      response clearly.
+    </p>
+  </div>
+</section>
+<section class="section section-split">
+  <div class="container split-layout">
+    <div class="portrait-panel reveal">
+      <div class="portrait-panel reveal">
+        <img src="" alt="Founder" class="founder-image" />
+      </div>
+    </div>
+    <div class="reveal delay-1">
+      <span class="section-label">Problem Solver</span>
+      <h2>{{ site_settings.founder_name }}</h2>
+      <p><strong>{{ site_settings.founder_role }}</strong></p>
+      <p>{{ site_settings.founder_bio }}</p>
+      <p>
+        This page is intentionally not written like a dull “about me” page. It
+        presents the founder as someone who identified a gap, responded
+        intentionally, and is building a platform around educational
+        transformation.
+      </p>
+    </div>
+  </div>
+</section>
+<section class="section tinted-section">
+  <div class="container timeline-grid">
+    <article class="timeline-card reveal">
+      <span>01</span>
+      <h3>The Problem Observed</h3>
+      <p>
+        Children with potential but without enough educational tools, books, and
+        support systems.
+      </p>
+    </article>
+    <article class="timeline-card reveal delay-1">
+      <span>02</span>
+      <h3>The Initiative Formed</h3>
+      <p>
+        A response rooted in impact, outreach, and meaningful partnerships
+        rather than mere visibility.
+      </p>
+    </article>
+    <article class="timeline-card reveal delay-2">
+      <span>03</span>
+      <h3>The Vision Expands</h3>
+      <p>
+        A long-term platform that can host events, visual stories, programs, and
+        strategic collaborations.
+      </p>
+    </article>
+  </div>
+</section>
+<section class="section dark-band">
+  <div class="container">
+    <div class="quote-panel center-panel reveal">
+      <blockquote>“{{ site_settings.founder_quote }}”</blockquote>
+      <span>{{ site_settings.founder_name }}</span>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block title %}Events | {{ site_settings.site_name
+}}{% endblock %} {% block content %}
+<section class="page-hero compact-hero">
+  <div class="container reveal">
+    <span class="eyebrow">Events</span>
+    <h1>All outreach events, educational activations, and impact moments.</h1>
+    <p>
+      Every event page is designed to accept a title, note, date, time,
+      location, and multiple media files from admin.
+    </p>
+  </div>
+</section>
+<section class="section">
+  <div class="container card-grid three-grid">
+    {% for event in events %}
+    <article class="event-card reveal">
+      <div class="media-shell">
+        {% if event.cover_media and event.cover_media_type == 'image' %}
+        <img
+          src="{{ url_for('static', filename='uploads/events/' ~ event.cover_media) }}"
+          alt="{{ event.title }}"
+        />
+        {% elif event.cover_media and event.cover_media_type == 'video' %}
+        <video autoplay muted loop playsinline>
+          <source
+            src="{{ url_for('static', filename='uploads/events/' ~ event.cover_media) }}"
+          />
+        </video>
+        {% else %}
+        <div class="placeholder-media">No media yet</div>
+        {% endif %}
+      </div>
+      <div class="event-card-body">
+        <span class="meta-line"
+          >{{ event.status or 'Upcoming' }} • {{ event.category or 'Event'
+          }}</span
+        >
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.summary or 'Event summary pending update.' }}</p>
+        <div class="event-mini-meta">
+          <span>{{ event.event_date or 'Date TBA' }}</span>
+          <span>{{ event.event_time or 'Time TBA' }}</span>
+        </div>
+        <a
+          href="{{ url_for('event_detail_page', slug=event.slug) }}"
+          class="text-link"
+          >Read details</a
+        >
+      </div>
+    </article>
+    {% else %}
+    <article class="empty-panel reveal">
+      <h3>No events uploaded yet</h3>
+      <p>Use the admin panel to upload event media and details.</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

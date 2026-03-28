@@ -1,0 +1,80 @@
+{% extends 'base.html' %} {% block title %}Contact | {{ site_settings.site_name
+}}{% endblock %} {% block content %}
+<section class="page-hero compact-hero">
+  <div class="container reveal">
+    <span class="eyebrow">Contact</span>
+    <h1>Start a conversation</h1>
+    <p>
+      Booking, collaboration, service requests, sponsorship ideas, and general
+      questions can begin here.
+    </p>
+  </div>
+</section>
+<section class="section section-split">
+  <div class="container split-layout">
+    <div class="reveal">
+      <span class="section-label">Contact Options</span>
+      <h2>Direct website inquiries plus your external channels.</h2>
+      <p>
+        Visitors can submit a form here and you still have the freedom to send
+        them to WhatsApp or Instagram where necessary.
+      </p>
+      <div class="contact-cards">
+        <a
+          href="{{ site_settings.whatsapp_url }}"
+          target="_blank"
+          rel="noopener"
+          class="contact-mini-card"
+          >Open WhatsApp</a
+        >
+        <a
+          href="{{ site_settings.instagram_url }}"
+          target="_blank"
+          rel="noopener"
+          class="contact-mini-card"
+          >Open Instagram</a
+        >
+        <div class="contact-mini-card">{{ site_settings.contact_email }}</div>
+        <div class="contact-mini-card">{{ site_settings.contact_phone }}</div>
+      </div>
+    </div>
+    <form class="contact-form reveal delay-1" method="post">
+      <div class="field-row">
+        <div class="field-group">
+          <label>Full name</label>
+          <input type="text" name="full_name" required />
+        </div>
+        <div class="field-group">
+          <label>Email</label>
+          <input type="email" name="email" required />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group">
+          <label>Phone number</label>
+          <input type="text" name="phone" required />
+        </div>
+        <div class="field-group">
+          <label>Organization</label>
+          <input type="text" name="organization" />
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Inquiry type</label>
+        <select name="inquiry_type">
+          <option value="Partnership">Partnership</option>
+          <option value="Booking">Booking</option>
+          <option value="Sponsorship">Sponsorship</option>
+          <option value="Volunteer">Volunteer</option>
+          <option value="General Inquiry">General Inquiry</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Message</label>
+        <textarea name="message" rows="7" required></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">Send inquiry</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

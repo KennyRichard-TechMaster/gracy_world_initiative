@@ -1,0 +1,28 @@
+{% extends 'admin/layout.html' %}
+{% block admin_title %}Site Settings{% endblock %}
+{% block admin_content %}
+<section class="admin-panel-block">
+    <div class="panel-header"><h1>Site Settings</h1></div>
+    <form method="post" class="contact-form admin-event-form">
+        <div class="field-row">
+            <div class="field-group"><label>Site name</label><input type="text" name="site_name" value="{{ settings.site_name }}"></div>
+            <div class="field-group"><label>Tagline</label><input type="text" name="tagline" value="{{ settings.tagline }}"></div>
+        </div>
+        <div class="field-row">
+            <div class="field-group"><label>WhatsApp URL</label><input type="text" name="whatsapp_url" value="{{ settings.whatsapp_url }}"></div>
+            <div class="field-group"><label>Instagram URL</label><input type="text" name="instagram_url" value="{{ settings.instagram_url }}"></div>
+        </div>
+        <div class="field-row">
+            <div class="field-group"><label>Contact email</label><input type="text" name="contact_email" value="{{ settings.contact_email }}"></div>
+            <div class="field-group"><label>Contact phone</label><input type="text" name="contact_phone" value="{{ settings.contact_phone }}"></div>
+        </div>
+        <div class="field-row">
+            <div class="field-group"><label>Founder name</label><input type="text" name="founder_name" value="{{ settings.founder_name }}"></div>
+            <div class="field-group"><label>Founder role</label><input type="text" name="founder_role" value="{{ settings.founder_role }}"></div>
+        </div>
+        <div class="field-group"><label>Founder bio</label><textarea name="founder_bio" rows="6">{{ settings.founder_bio }}</textarea></div>
+        <div class="field-group"><label>Founder quote</label><textarea name="founder_quote" rows="3">{{ settings.founder_quote }}</textarea></div>
+        <button class="btn btn-primary" type="submit">Save settings</button>
+    </form>
+</section>
+{% endblock %}

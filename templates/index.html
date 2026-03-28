@@ -1,0 +1,283 @@
+{% extends 'base.html' %} {% block title %}Home | {{ site_settings.site_name
+}}{% endblock %} {% block content %}
+<section class="hero-section">
+  <div class="container hero-layout">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">Education Initiative • Nigeria</span>
+      <h1>
+        Building brighter futures through books, learning access, and meaningful
+        partnerships.
+      </h1>
+      <p>{{ site_settings.tagline }}</p>
+      <div class="hero-actions">
+        <a href="{{ url_for('contact_page') }}" class="btn btn-primary"
+          >Partner With Us</a
+        >
+        <a href="{{ url_for('events_page') }}" class="btn btn-secondary"
+          >View Events</a
+        >
+      </div>
+      <div class="hero-metrics">
+        <article>
+          <strong>SDG 4</strong>
+          <span>Quality Education</span>
+        </article>
+        <article>
+          <strong>SDG 17</strong>
+          <span>Partnerships for Goals</span>
+        </article>
+        <article>
+          <strong>Premium</strong>
+          <span>Simple, classy, impactful</span>
+        </article>
+      </div>
+    </div>
+    <div class="hero-visual reveal delay-1">
+      <div class="floating-card one">
+        <h3>The Problem</h3>
+        <p>
+          Many children still lack books, encouragement, and educational support
+          that should be basic.
+        </p>
+      </div>
+      <div class="floating-card two">
+        <h3>The Response</h3>
+        <p>
+          We create action through educational programs, community outreach, and
+          strategic partnerships.
+        </p>
+      </div>
+      <div class="hero-orb orb-a"></div>
+      <div class="hero-orb orb-b"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-split">
+  <div class="container split-layout">
+    <div class="reveal">
+      <span class="section-label">Why We Exist</span>
+      <h2>A mission designed around educational impact, not noise.</h2>
+      <p>
+        We are not building an ordinary foundation presence. This initiative is
+        designed as a purposeful platform that tells a story, builds trust, and
+        inspires action. It combines community outreach, educational support,
+        and partnership-led impact in a way that feels premium and easy to
+        navigate.
+      </p>
+      <p>
+        Every section of the site is meant to do something clear: help visitors
+        understand the mission, see the work, trust the vision, and get involved
+        without confusion.
+      </p>
+    </div>
+    <div class="story-grid reveal delay-1">
+      <article class="story-card">
+        <h3>Books & Access</h3>
+        <p>
+          Helping children access useful reading materials and academic support
+          resources.
+        </p>
+      </article>
+      <article class="story-card">
+        <h3>Outreach Moments</h3>
+        <p>
+          Taking learning experiences closer to communities through planned
+          events and activations.
+        </p>
+      </article>
+      <article class="story-card">
+        <h3>Strategic Partnerships</h3>
+        <p>
+          Working with brands, schools, volunteers, and organizations to
+          multiply outcomes.
+        </p>
+      </article>
+      <article class="story-card">
+        <h3>Clear Storytelling</h3>
+        <p>
+          Showing the work through organized pages, media-rich events, and
+          visual documentation.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section tinted-section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="section-label">Programs</span>
+      <h2>Focused departments that visitors can actually explore.</h2>
+      <p>
+        Instead of clutter, each focus area has a clear page and can grow over
+        time.
+      </p>
+    </div>
+    <div class="card-grid three-grid">
+      {% for program in programs %}
+      <article class="program-card reveal">
+        <span class="program-tag">{{ program.icon_label or 'Program' }}</span>
+        <h3>{{ program.title }}</h3>
+        <p>{{ program.summary }}</p>
+        <a
+          href="{{ url_for('program_detail_page', slug=program.slug) }}"
+          class="text-link"
+          >Explore program</a
+        >
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="section-label">Featured Events</span>
+      <h2>Events, outreach activities, and impact stories.</h2>
+      <p>
+        Events added by the admin will appear here automatically with media and
+        details.
+      </p>
+    </div>
+    <div class="card-grid three-grid">
+      {% for event in events %}
+      <article class="event-card reveal">
+        <div class="media-shell">
+          {% if event.cover_media and event.cover_media_type == 'image' %}
+          <img
+            src="{{ url_for('static', filename='uploads/events/' ~ event.cover_media) }}"
+            alt="{{ event.title }}"
+          />
+          {% elif event.cover_media and event.cover_media_type == 'video' %}
+          <video autoplay muted loop playsinline>
+            <source
+              src="{{ url_for('static', filename='uploads/events/' ~ event.cover_media) }}"
+            />
+          </video>
+          {% else %}
+          <div class="placeholder-media">No media yet</div>
+          {% endif %}
+        </div>
+        <div class="event-card-body">
+          <span class="meta-line"
+            >{{ event.category or 'Event' }} • {{ event.status or 'Upcoming'
+            }}</span
+          >
+          <h3>{{ event.title }}</h3>
+          <p>
+            {{ event.summary or 'More event details will appear here when
+            updated by admin.' }}
+          </p>
+          <div class="event-mini-meta">
+            <span>{{ event.event_date or 'Date TBA' }}</span>
+            <span>{{ event.location or 'Nigeria' }}</span>
+          </div>
+          <a
+            href="{{ url_for('event_detail_page', slug=event.slug) }}"
+            class="text-link"
+            >Open event page</a
+          >
+        </div>
+      </article>
+      {% else %}
+      <article class="empty-panel reveal">
+        <h3>No events yet</h3>
+        <p>
+          Once the admin uploads events, their titles, dates, notes, images, and
+          videos will appear here automatically.
+        </p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section dark-band">
+  <div class="container split-layout center-align">
+    <div class="reveal">
+      <span class="section-label bright">Founder Story</span>
+      <h2>
+        {{ site_settings.founder_name }} is leading this mission with a
+        problem-solving mindset.
+      </h2>
+      <p>{{ site_settings.founder_bio }}</p>
+      <a href="{{ url_for('founder_page') }}" class="btn btn-light"
+        >Read founder page</a
+      >
+    </div>
+    <div class="quote-panel reveal delay-1">
+      <blockquote>“{{ site_settings.founder_quote }}”</blockquote>
+      <span>{{ site_settings.founder_role }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="section-label">Visual Storytelling</span>
+      <h2>A cleaner gallery experience, not a random photo dump.</h2>
+      <p>
+        The latest images and videos are organized into an elegant preview grid.
+      </p>
+    </div>
+    <div class="masonry-grid">
+      {% for item in recent_gallery %}
+      <a
+        class="gallery-tile reveal"
+        href="{{ url_for('event_detail_page', slug=item.event_slug) }}"
+      >
+        {% if item.media_type == 'image' %}
+        <img
+          src="{{ url_for('static', filename='uploads/events/' ~ item.filename) }}"
+          alt="{{ item.alt_text or item.event_title }}"
+        />
+        {% else %}
+        <video muted autoplay loop playsinline>
+          <source
+            src="{{ url_for('static', filename='uploads/events/' ~ item.filename) }}"
+          />
+        </video>
+        {% endif %}
+        <span>{{ item.event_title }}</span>
+      </a>
+      {% else %}
+      <div class="empty-panel reveal">
+        <h3>No gallery content yet</h3>
+        <p>Upload event media from the admin panel to populate this section.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section cta-section">
+  <div class="container cta-box reveal">
+    <div>
+      <span class="section-label">Get Involved</span>
+      <h2>
+        Book a conversation, make an inquiry, or partner directly from the
+        website.
+      </h2>
+      <p>
+        Brands, schools, volunteers, and collaborators can reach out here
+        instead of chasing contact links everywhere.
+      </p>
+    </div>
+    <div class="cta-actions">
+      <a href="{{ url_for('contact_page') }}" class="btn btn-primary"
+        >Make an Inquiry</a
+      >
+      <a
+        href="{{ site_settings.whatsapp_url }}"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-secondary"
+        >Open WhatsApp</a
+      >
+    </div>
+  </div>
+</section>
+{% endblock %}

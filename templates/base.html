@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{{ site_settings.site_name }}{% endblock %}</title>
+    <meta name="description" content="{{ site_settings.tagline }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
+    <div class="cursor-glow"></div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="{{ url_for('home') }}" class="brand-mark">
+          <img
+            src="../static/images/WhatsApp_Image_2026-03-28_at_8.42.58_PM-removebg-preview.png"
+            alt="Logo"
+          />
+          <div>
+            <strong>{{ site_settings.site_name }}</strong>
+            <small>SDG 4 • SDG 17</small>
+          </div>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          ☰
+        </button>
+        <nav class="site-nav" id="siteNav">
+          <a href="{{ url_for('home') }}">Home</a>
+          <a href="{{ url_for('founder_page') }}">Founder</a>
+          <a href="{{ url_for('programs_page') }}">Programs</a>
+          <a href="{{ url_for('events_page') }}">Events</a>
+          <a href="{{ url_for('gallery_page') }}">Gallery</a>
+          <a href="{{ url_for('faq_page') }}">FAQ</a>
+          <a href="{{ url_for('contact_page') }}">Contact</a>
+          <a href="{{ url_for('admin_login') }}" class="nav-cta">Admin</a>
+        </nav>
+      </div>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <div class="flash-stack container">
+      {% for category, message in messages %}
+      <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+
+    <main>{% block content %}{% endblock %}</main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>{{ site_settings.site_name }}</h3>
+          <p>{{ site_settings.tagline }}</p>
+          <div class="footer-socials">
+            <a
+              href="{{ site_settings.whatsapp_url }}"
+              target="_blank"
+              rel="noopener"
+              >WhatsApp</a
+            >
+            <a
+              href="{{ site_settings.instagram_url }}"
+              target="_blank"
+              rel="noopener"
+              >Instagram</a
+            >
+          </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="{{ url_for('programs_page') }}">Programs</a>
+          <a href="{{ url_for('events_page') }}">Events</a>
+          <a href="{{ url_for('gallery_page') }}">Gallery</a>
+          <a href="{{ url_for('faq_page') }}">FAQ</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>{{ site_settings.contact_email }}</p>
+          <p>{{ site_settings.contact_phone }}</p>
+          <p>Nigeria</p>
+        </div>
+        <div>
+          <h4>Impact Themes</h4>
+          <p>Quality Education</p>
+          <p>Partnerships for the Goals</p>
+          <p>Children, books, outreach, and access.</p>
+        </div>
+      </div>
+      <div class="container footer-base">
+        <span>© {{ current_year }} {{ site_settings.site_name }}</span>
+        <span>Built for a premium education initiative experience.</span>
+      </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

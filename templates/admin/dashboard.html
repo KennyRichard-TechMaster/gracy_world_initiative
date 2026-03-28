@@ -1,0 +1,51 @@
+{% extends 'admin/layout.html' %}
+{% block admin_title %}Dashboard{% endblock %}
+{% block admin_content %}
+<section class="admin-stats-grid">
+    <article class="admin-stat-card"><span>Total Events</span><strong>{{ total_events }}</strong></article>
+    <article class="admin-stat-card"><span>Total Media</span><strong>{{ total_media }}</strong></article>
+    <article class="admin-stat-card"><span>Total Inquiries</span><strong>{{ total_inquiries }}</strong></article>
+</section>
+<section class="admin-panel-block">
+    <div class="panel-header"><h2>Recent Events</h2><a href="{{ url_for('admin_create_event') }}" class="btn btn-primary small-btn">Add event</a></div>
+    <div class="table-shell">
+        <table>
+            <thead><tr><th>Title</th><th>Date</th><th>Category</th><th>Media</th><th>Action</th></tr></thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>{{ event.title }}</td>
+                    <td>{{ event.event_date or 'TBA' }}</td>
+                    <td>{{ event.category or 'General' }}</td>
+                    <td>{{ event.media_count }}</td>
+                    <td><a href="{{ url_for('admin_edit_event', event_id=event.id) }}" class="table-link">Edit</a></td>
+                </tr>
+                {% else %}
+                <tr><td colspan="5">No events yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+<section class="admin-panel-block">
+    <div class="panel-header"><h2>Recent Inquiries</h2><a href="{{ url_for('admin_messages_page') }}" class="btn btn-secondary small-btn">View all</a></div>
+    <div class="table-shell">
+        <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Type</th><th>Time</th></tr></thead>
+            <tbody>
+                {% for inquiry in inquiries %}
+                <tr>
+                    <td>{{ inquiry.full_name }}</td>
+                    <td>{{ inquiry.email }}</td>
+                    <td>{{ inquiry.phone }}</td>
+                    <td>{{ inquiry.inquiry_type or 'General' }}</td>
+                    <td>{{ inquiry.created_at }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="5">No inquiries yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

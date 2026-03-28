@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block title %}Programs | {{ site_settings.site_name
+}}{% endblock %} {% block content %}
+<section class="page-hero compact-hero">
+  <div class="container reveal">
+    <span class="eyebrow">Programs</span>
+    <h1>Structured initiatives that visitors can explore with clarity.</h1>
+    <p>
+      These focus areas make your work easier to understand and easier to grow
+      over time.
+    </p>
+  </div>
+</section>
+<section class="section">
+  <div class="container card-grid three-grid">
+    {% for program in programs %}
+    <article class="program-card reveal">
+      <span class="program-tag">{{ program.icon_label or 'Focus' }}</span>
+      <h3>{{ program.title }}</h3>
+      <p>{{ program.summary }}</p>
+      <a
+        href="{{ url_for('program_detail_page', slug=program.slug) }}"
+        class="text-link"
+        >Open details</a
+      >
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

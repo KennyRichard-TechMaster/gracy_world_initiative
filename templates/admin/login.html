@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body class="admin-auth-body">
+    <div class="admin-auth-card">
+        <span class="eyebrow">Admin Access</span>
+        <h1>Login</h1>
+        <p>Username: <strong>Kenny</strong> • Password: <strong>1234Richard</strong></p>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="post" class="contact-form compact-form">
+            <div class="field-group">
+                <label>Username</label>
+                <input type="text" name="username" required>
+            </div>
+            <div class="field-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+            <button class="btn btn-primary" type="submit">Login to dashboard</button>
+        </form>
+    </div>
+</body>
+</html>
