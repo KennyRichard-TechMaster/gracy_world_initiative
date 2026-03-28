@@ -29,8 +29,10 @@ app = Flask(__name__)
 app.secret_key = 'replace-this-with-a-strong-secret-key'
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
 
-ADMIN_USERNAME = 'Kenny'
-ADMIN_PASSWORD = '1234Richard'
+ADMINS = [
+    {"username": "Kenny", "password": "1234Richard"},
+    {"username": "Grace", "password": "1234gracy26"},
+]
 ALLOWED_IMAGE_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp', 'gif'}
 ALLOWED_VIDEO_EXTENSIONS = {'mp4', 'webm', 'mov', 'm4v'}
 
@@ -442,11 +444,23 @@ def admin_login():
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
         password = request.form.get('password', '').strip()
-        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+
+        ADMINS = [
+            {"username": "Kenny", "password": "1234Richard"},
+            {"username": "Grace", "password": "1234gracy26"},
+        ]
+
+        admin_found = next(
+            (admin for admin in ADMINS if admin["username"] == username and admin["password"] == password),
+            None
+        )
+
+        if admin_found:
             session['admin_logged_in'] = True
             session['admin_username'] = username
-            flash('Welcome back, Kenny.', 'success')
+            flash(f'Welcome back, {username}.', 'success')
             return redirect(url_for('admin_dashboard'))
+
         flash('Invalid admin login details.', 'error')
         return redirect(url_for('admin_login'))
 
