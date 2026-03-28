@@ -859,3 +859,29 @@ thead {
     width: min(94%, var(--container));
   }
 }
+@media (max-width: 768px) {
+  /* 🔥 STOP FLOATING ON MOBILE */
+  .floating-card {
+    position: relative !important;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    animation: none;
+  }
+
+  .floating-card.one,
+  .floating-card.two {
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+  }
+
+  /* STACK THEM CLEANLY */
+  .hero-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: auto;
+  }
+}
