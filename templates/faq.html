@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block title %}FAQ | {{ site_settings.site_name }}{%
 endblock %} {% block content %}
+
 <section class="page-hero compact-hero">
   <div class="container reveal">
     <span class="eyebrow">FAQ</span>
@@ -10,35 +11,167 @@ endblock %} {% block content %}
     </p>
   </div>
 </section>
+
 <section class="section">
   <div class="container faq-list">
-    {% set faqs = [ ('What does this initiative focus on?', 'The initiative
-    focuses on educational support, book access, outreach experiences, and
-    partnership-led impact for children and learning communities.'), ('Can
-    organizations partner with the initiative?', 'Yes. Brands, schools,
-    volunteers, and institutions can reach out through the contact form or
-    social contact links to discuss partnership opportunities.'), ('Can the
-    admin update events directly?', 'Yes. The admin dashboard allows you to
-    create, edit, and delete events, including event title, note, date, time,
-    location, category, and multiple media files.'), ('Can the website show both
-    images and videos?', 'Yes. The event management workflow supports both
-    images and videos, and those items can appear on event pages and gallery
-    pages.'), ('How are inquiries handled?', 'Inquiries submitted through the
-    contact page are stored in the database and shown on the admin dashboard for
-    review.'), ('Does the website support future growth?', 'Yes. The structure
-    includes public pages, event detail pages, a gallery, an FAQ, and
-    administrative tools that can be expanded later.'), ] %} {% for question,
-    answer in faqs %}
     <article class="faq-item reveal">
       <button class="faq-question" type="button">
-        <span>{{ question }}</span>
+        <span>When was Gracy World Initiative founded?</span>
         <span>+</span>
       </button>
       <div class="faq-answer">
-        <p>{{ answer }}</p>
+        <p>December 14, 2024.</p>
       </div>
     </article>
-    {% endfor %}
+
+    <article class="faq-item reveal">
+      <button class="faq-question" type="button">
+        <span>What is the Gracy World Initiative (GWI)?</span>
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Gracy World Initiative is a social impact organization dedicated to
+          empowering the next generation by bridging the gap between technology
+          and emotional intelligence. Founded by Oreoluwa Grace Filani, GWI
+          focuses on providing young scholars with high-demand AI productivity
+          skills while building mental health resilience to help them navigate
+          and reform modern systems.
+        </p>
+      </div>
+    </article>
+
+    <article class="faq-item reveal">
+      <button class="faq-question" type="button">
+        <span
+          >Who is eligible to participate in GWI programs like
+          <strong>Project 1,000</strong>?</span
+        >
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Our programs are primarily designed for students and young scholars
+          who are eager to enhance their digital literacy and personal
+          development. While some events are tailored to specific regions, such
+          as our recent focus on Ikorodu, Lagos, we aim to provide resources and
+          training that inspire youth from all backgrounds to dream beyond their
+          immediate circumstances.
+        </p>
+      </div>
+    </article>
+
+    <article class="faq-item reveal">
+      <button class="faq-question" type="button">
+        <span
+          >How does GWI integrate mental health with technology training?</span
+        >
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          We believe that technical skills alone are not enough for long-term
+          success. GWI adopts a holistic approach where AI productivity training
+          is paired with mental health support and resilience workshops. This
+          ensures our participants are not only tech-savvy but also emotionally
+          equipped to handle the pressures of the digital age and professional
+          environments.
+        </p>
+      </div>
+    </article>
+
+    <article class="faq-item reveal">
+      <button class="faq-question" type="button">
+        <span>How are inquiries handled?</span>
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Inquiries submitted through the contact page are stored in the
+          database and shown on the admin dashboard for review.
+        </p>
+      </div>
+    </article>
+
+    <article class="faq-item reveal">
+      <button class="faq-question" type="button">
+        <span>What are the main goals of <strong>Project 1,000</strong>?</span>
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          <strong>Project 1,000</strong> is a flagship seminar series aimed at
+          transforming the lives of 1,000 students. The primary objectives are
+          to:
+        </p>
+        <ul>
+          <li>
+            <strong>a.</strong> Equip students with practical AI productivity
+            tools.
+          </li>
+          <li>
+            <strong>b.</strong> Foster mental health awareness and emotional
+            intelligence.
+          </li>
+          <li>
+            <strong>c.</strong> Rewrite local narratives of vulnerability into
+            blueprints for tech innovation and global visibility.
+          </li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="faq-item reveal">
+      <button class="faq-question" type="button">
+        <span
+          >How does the initiative support the UN Sustainable Development Goals
+          (SDGs)?</span
+        >
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          GWI is deeply committed to global progress, specifically targeting SDG
+          4 (Quality Education) by providing accessible tech training and SDG 17
+          (Partnerships for the Goals) by collaborating with strategic partners
+          to drive impactful social change and sustainable community
+          development.
+        </p>
+      </div>
+    </article>
+
+    <article class="faq-item reveal">
+      <button class="faq-question" type="button">
+        <span>How can I support or partner with Gracy World Initiative?</span>
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          We are always looking for strategic partners, donors, and volunteers
+          who share our vision for youth empowerment. You can support us by:
+        </p>
+        <ul>
+          <li>
+            <strong>Mentorship:</strong> Sharing your expertise in AI or mental
+            health.
+          </li>
+          <li>
+            <strong>Sponsorship:</strong> Funding training materials and seminar
+            logistics.
+          </li>
+          <li>
+            <strong>Collaboration:</strong> Partnering with us for future
+            <strong>Project</strong> series to expand our reach to more
+            communities.
+          </li>
+        </ul>
+        <p>
+          Please reach out via our contact page for more details on how to get
+          involved.
+        </p>
+      </div>
+    </article>
   </div>
 </section>
+
 {% endblock %}

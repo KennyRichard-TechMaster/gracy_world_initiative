@@ -532,9 +532,18 @@ h4 {
   color: var(--muted);
 }
 .faq-item.active .faq-answer {
-  max-height: 220px;
+  max-height: 2000px;
+}
+.faq-answer ul {
+  margin: 0 24px 24px 44px;
+  padding: 0;
+  color: var(--muted);
 }
 
+.faq-answer li {
+  margin-bottom: 10px;
+  line-height: 1.8;
+}
 .contact-form {
   padding: 28px;
 }
